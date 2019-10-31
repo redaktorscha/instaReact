@@ -80,7 +80,8 @@ header {
 
 .post > img {
     width: 100%;
-    height: 420px;
+    height: 500px;
+    /*height: 420px;*/
     object-fit: cover;
 }
 

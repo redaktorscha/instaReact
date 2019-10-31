@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import User from './User';
 
 //post for Posts
 export default class Post extends Component {
@@ -6,7 +7,12 @@ export default class Post extends Component {
     render() {
         const { src, alt } = this.props;
         return (
-            <div className='post'>                
+            <div className='post'>
+                <User
+                min
+                src='https://upload.wikimedia.org/wikipedia/en/thumb/e/e7/Ginny_Weasley_poster.jpg/220px-Ginny_Weasley_poster.jpg'
+                alt='user'
+                name='Ginny Weasley'/>                
 
                 <img src={src} alt={alt}></img>
                 <div className='post__name'>post name</div>
