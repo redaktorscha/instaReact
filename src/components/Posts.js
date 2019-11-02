@@ -1,13 +1,82 @@
 import React, { Component } from 'react';
-import Post from './Post';
+//import Post from './Post';
+import InstaService from '../services/instaService';
+import User from './User';
+import ErrorMessage from './Error';
 
+//component: posts block(left)
 export default class Posts extends Component {
+    instaService = new InstaService();
+    state = {
+        posts: [],
+        error: false,
+    }
+
+    //receive data from server and update posts array
+    updatePosts() {
+        this.instaService.getAllPosts()
+        .then(this.onPostsLoaded) //data inside
+        .catch(this.onError);
+    }
+
+//if successfully
+    onPostsLoaded = (posts) => {
+        this.setState({
+            posts, //===posts: posts,
+            error: false,
+        });
+        console.log(this.state.posts);
+    }
+
+//if not
+    onError = (err) => {
+        this.setState({
+            error: true,
+        });
+        console.log(err);
+    }
+
+    componentDidMount() {
+        this.updatePosts();
+    }
+
+    renderItems(arr) {
+        return arr.map(item => {
+            const { name, altname, photo, src, alt, descr, id } = item;
+        
+
+            return (
+                <div key={id} className='post'>
+                    <User
+                        min
+                        src={photo}
+                        alt={altname}
+                        name={name}/>                
+
+                    <img src={src} alt={alt}></img>
+                    <div className='post__name'>{name}</div>
+                    <div className='post__descr'>{descr}</div>
+                </div>
+            );
+        });
+
+    }
+
     render() {
+        const { error, posts } = this.state;
+
+        if (error) {
+            return <ErrorMessage />
+           
+        }
+
+        const items = this.renderItems(posts);
+
         return (
             <div className='left'>
-                <Post src='https://static.boredpanda.com/blog/wp-content/uploads/2018/10/The-Australian-Firefighters-2019-calendar-has-already-been-announced-and-this-charity-is-very-beautiful-to-see-5bbf039e6b9ff__700.jpg' alt='first'/>
-                <Post src='https://hips.hearstapps.com/ghk.h-cdn.co/assets/17/42/1024x1375/gallery-1508259728-hot-firefighters-australian-firefighters-calendar-2018122-6.jpg' alt='second'/>
+                {items}
             </div>
         )
     }
+    
 }

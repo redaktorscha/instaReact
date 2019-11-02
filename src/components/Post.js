@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import User from './User';
 
-//post for Posts
+//post component > Posts
 export default class Post extends Component {
     
     render() {

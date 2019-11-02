@@ -1,10 +1,12 @@
 import React from 'react';
 
+//user component > users
 const User = (props) => {
     const { min, src, alt, name } = props;
 
     return (
-        <a href='#s' className={min ? 'user min' : 'user'}>
+        // eslint-disable-next-line
+        <a href='#' className={min ? 'user min' : 'user'}>
             <img src={src} alt={alt}></img>
             <div>{name}</div>
         </a>

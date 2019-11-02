@@ -1,6 +1,7 @@
 import React from 'react';
 import User from './User';
 
+//component: users block (right column)
 export default function Users() {
     return (
         <div className='right'>
