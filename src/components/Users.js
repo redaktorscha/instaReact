@@ -1,14 +1,18 @@
 import React from 'react';
 import User from './User';
+import {Link} from 'react-router-dom';
 
 //component: users block (right column)
 export default function Users() {
     return (
         <div className='right'>
-            <User
-                src='https://upload.wikimedia.org/wikipedia/en/thumb/e/e7/Ginny_Weasley_poster.jpg/220px-Ginny_Weasley_poster.jpg'
-                alt='Ginny'
-                name='Ginny Weasley'/>
+            <Link to='/profile/'>
+                <User
+                    src='https://upload.wikimedia.org/wikipedia/en/thumb/e/e7/Ginny_Weasley_poster.jpg/220px-Ginny_Weasley_poster.jpg'
+                    alt='Ginny'
+                    name='Ginny Weasley'/>
+            </Link>
+            
             <div className='users__block'>
             <User
                 min

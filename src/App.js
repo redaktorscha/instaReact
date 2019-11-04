@@ -2,15 +2,18 @@ import React from 'react';
 import Header from './components/Header';
 import Feed from './components/Feed';
 import Profile from './components/Profile';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 //react-app
 function App() {
   return (
-    <div className="App">
-      <Header/>
-      <Feed/>
-      <Profile/>
-    </div>
+    <Router>
+      <div className="App">
+        <Header/>
+        <Route path='/' component={Feed} exact />
+        <Route path='/profile/' component={Profile} />        
+      </div>
+    </Router>
   );
 };
 
