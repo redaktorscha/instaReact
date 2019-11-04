@@ -2,6 +2,7 @@ import React from 'react';
 import User from './User';
 import Palette from './Palette';
 
+//user profile page
 const Profile = () => {
     return (
         <div className='container profile'>

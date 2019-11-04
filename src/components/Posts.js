@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import Post from './Post';
-import InstaService from '../services/instaService';
+import InstaService from '../services/InstaService';
 import User from './User';
 import ErrorMessage from './Error';
 
