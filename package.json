@@ -10,7 +10,9 @@
     "react-scripts": "3.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm run backend & npm run dev",
+    "dev": "react-scripts start",
+    "backend": "json-server ./src/posts.json --port 3001",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
