@@ -21,6 +21,12 @@ export default class InstaService {
         return await this.getResource('/posts/');
     }
 
+//data for right column
+    getUsers = async () => {
+        return await this.getResource('/users/');        
+    }
+
+//pics for palette
     getAllPhotos = async () => {
        const res = await this.getResource('/posts/');
        return res.map(this._filterPosts);

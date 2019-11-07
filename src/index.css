@@ -64,6 +64,18 @@ header {
     max-width: 850px;
 }
 
+.right {
+    max-width: 265px;
+}
+
+.right > a {
+    text-decoration: none;
+}
+
+.right .user {
+    font-weight: bold;
+}
+
 .post {
     margin-bottom: 70px;
     width: 650px;
@@ -116,7 +128,6 @@ header {
 .user div {
     margin-left: 20px;
     font-size: 18px;
-    font-weight: 500;
 }
 
 .min {
@@ -137,6 +148,7 @@ header {
     margin-left: 20px;
     font-size: 14px;
     font-weight: 400;
+    color: black;
 }
 
 .users__block {

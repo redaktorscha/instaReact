@@ -29,7 +29,7 @@ export default class Palette extends Component {
         this.setState(() => {
             return {error: true}
             })
-            console.log(err);
+            //console.log(err);
     }
 
 //loading photos to state
