@@ -64,9 +64,9 @@ header {
     max-width: 850px;
 }
 
-.right {
+/* .right {
     max-width: 265px;
-}
+} */
 
 .right > a {
     text-decoration: none;
@@ -154,7 +154,7 @@ header {
 .users__block {
     margin-top: 20px;
     padding: 20px;
-    width: 265px;
+    max-width: 265px;
     min-height: 260px;
     background: #FFFFFF;
     border: 1px solid rgba(0, 0, 0, 0.1);

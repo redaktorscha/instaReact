@@ -1,36 +1,84 @@
 import React from 'react';
 import User from './User';
+import ErrorMessage from './Error';
 import {Link} from 'react-router-dom';
 
+import React, { Component } from 'react';
+import InstaService from '../services/InstaService';
+
+
 //component: users block (right column)
-export default function Users() {
-    return (
-        <div className='right'>
-            <Link to='/profile/'>
+export default class Users extends Component {
+
+    constructor() {
+        super();
+
+        this.instaService = new InstaService();
+        this.state = {
+            users: [],
+            error: false,
+        }    
+    }
+    componentDidMount() {
+        this.loadUsers();
+    }
+
+    loadUsers() {
+        this.instaService.getUsers()
+        .then(this.onUsersLoaded)
+        .catch(this.onError);
+    }
+
+    onError = (err) => {
+        this.setState(() => {
+            return {error: true}
+            });
+            console.log(err);
+    }
+
+    onUsersLoaded = (users) => {
+        this.setState({
+            error: false,
+            users: users,
+        })
+    }
+
+    renderUsers(dataArr) {
+        return dataArr.map(elem => {
+            const { nick, alt, pic, id } = elem;
+            return (
                 <User
-                    src='https://upload.wikimedia.org/wikipedia/en/thumb/e/e7/Ginny_Weasley_poster.jpg/220px-Ginny_Weasley_poster.jpg'
-                    alt='Ginny'
-                    name='Ginny Weasley'/>
-            </Link>
-            
-            <div className='users__block'>
-            <User
+                key={id}
                 min
-                src='https://i.pinimg.com/originals/9f/ad/c5/9fadc58a6801e8fcd659ccc4d07576a9.jpg'
-                alt='Hermione'
-                name='Hermione Granger'/>
-            <User
-                min
-                src='https://peopletalk.ru/wp-content/uploads/2019/04/0530-luna-lovegood-evanna-lynch-harry-potter-now-photos-primary-1200x630-640x481.jpg'
-                alt='Luna'    
-                name='Luna Lovegood'/>            
-            <User
-                min    
-                src='https://cdn.playbuzz.com/cdn//cc5cbcb0-66d6-4fa1-b0ec-4a83075ad55d/418ce638-3681-44fa-b601-7267a9861be4.jpg'
-                alt='Minerva'
-                name='Minerva McGonagall'/>
-            </div>
-        </div>
-    )
+                src={pic}
+                alt={alt}
+                name={nick}/>
+            );
+        })
+
+    }
+    
+    render() {
+        const { error, users } = this.state;
+
+        const userInfos = this.renderUsers(users);
+
+        if (error) {
+            return <ErrorMessage />
+           
+        }
+        return (
+           <div className='users__block'>
+                <Link to='/profile/'>
+                    <User
+                        src='https://upload.wikimedia.org/wikipedia/en/thumb/e/e7/Ginny_Weasley_poster.jpg/220px-Ginny_Weasley_poster.jpg'
+                        alt='Ginny'
+                        name='Ginny Weasley'/>
+                </Link>
+               {userInfos}
+           </div>
+        )
+    }
+   
 
 }

@@ -2,7 +2,7 @@
 //fetching data from server (async)
 export default class InstaService {
     constructor() {
-        this._apiBase = 'http://localhost:3001';
+        this._apiBase = 'http://localhost:4000';
     }
 
     //receive data
