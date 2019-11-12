@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import InstaService from '../services/InstaService';
 import ErrorMessage from './Error';
+//import Spinner from './Spinner';
 
 //user palette with pics
 export default class Palette extends Component {
@@ -10,6 +11,7 @@ export default class Palette extends Component {
         this.InstaService = new InstaService();
         this.state = {        
             error: false,
+            //loading: true,
             photos: [],       
         };
     }   
@@ -36,6 +38,7 @@ export default class Palette extends Component {
     onPhotosLoaded = (photos) => {
         this.setState({
             error: false,
+            loading: false,
             photos: photos,
         })
     }
@@ -51,11 +54,15 @@ export default class Palette extends Component {
     }
 
     render() {
-        const {error, photos} = this.state;
+        const {error, photos, loading} = this.state;
 
         if (error) {
-            return <ErrorMessage/>
+            return <ErrorMessage/>;
         }
+
+        // if (loading) {
+        //     return <Spinner/>;
+        // }
 
         const items = this.renderItems(photos);
 

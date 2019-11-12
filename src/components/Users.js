@@ -1,4 +1,3 @@
-import React from 'react';
 import User from './User';
 import ErrorMessage from './Error';
 import {Link} from 'react-router-dom';
@@ -40,7 +39,8 @@ export default class Users extends Component {
         this.setState({
             error: false,
             users: users,
-        })
+        });
+        console.log(this.state.users)
     }
 
     renderUsers(dataArr) {
