@@ -9,9 +9,9 @@ export default class Spinner extends Component {
            visible
            type="Oval"
            color="#42f5da"
-           height={80}
-           width={80}
-           timeout={2000}  
+           height={200}
+           width={200}
+           timeout={3000}  
         />
        );
       }

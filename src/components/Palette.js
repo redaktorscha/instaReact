@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import InstaService from '../services/InstaService';
 import ErrorMessage from './Error';
-//import Spinner from './Spinner';
+import Spinner from './Spinner';
 
 //user palette with pics
 export default class Palette extends Component {
@@ -11,7 +11,7 @@ export default class Palette extends Component {
         this.InstaService = new InstaService();
         this.state = {        
             error: false,
-            //loading: true,
+            loading: true,
             photos: [],       
         };
     }   
@@ -19,6 +19,7 @@ export default class Palette extends Component {
     componentDidMount() {
         this.updatePhotos();
     }
+    
 
 //getting photos from server
     updatePhotos() {
@@ -60,9 +61,9 @@ export default class Palette extends Component {
             return <ErrorMessage/>;
         }
 
-        // if (loading) {
-        //     return <Spinner/>;
-        // }
+        if (loading) {
+            return <Spinner/>;
+        }
 
         const items = this.renderItems(photos);
 
