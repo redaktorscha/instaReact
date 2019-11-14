@@ -12,37 +12,33 @@ export default class InstaService {
         if (!res.ok) {
             throw new Error(`Could not fetch ${url}, received ${res.status}`);
         };
-        
-        //const result = await res.json();
-        //const {posts, users} = result;        
+                
         return await res.json();
     }
 
     //get all posts from server
     getAllPosts = async () => {
-        const res = await this.getResource('/posts/');
-        const {posts} = res;
-        return await posts;
+        const {posts} = await this.getResource('/posts/');
+        return posts;
     }
 
 //data for right column
     getUsers = async () => {
-        const res = await this.getResource('/users/');
-        const {users} = res;
+        const {users} = await this.getResource('/users/');
         return users;
     }
 
 //pics for palette
     getAllPhotos = async () => {
-       const res = await this.getResource('/posts/');
-       const {posts} = res;
-       return posts.map(this._filterPosts);
+       const {posts} = await this.getResource('/posts/');
+       //return posts.map(this._filterPosts);
+       return posts.map(({src, alt}) => ({src, alt}));
     }
 
-    _filterPosts = (post) => {
-        return {
-            src: post.src,
-            alt: post.alt,
-        };            
-    }
+    // _filterPosts = (post) => {
+    //     return {
+    //         src: post.src,
+    //         alt: post.alt,
+    //     };            
+    // }
 }

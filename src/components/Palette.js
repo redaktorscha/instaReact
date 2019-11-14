@@ -27,6 +27,7 @@ export default class Palette extends Component {
         .then(this.onPhotosLoaded)
         .catch(this.onError);        
     }
+   
 
     onError = (err) => {
         this.setState(() => {
@@ -38,9 +39,9 @@ export default class Palette extends Component {
 //loading photos to state
     onPhotosLoaded = (photos) => {
         this.setState({
+            photos: photos,
             error: false,
             loading: false,
-            photos: photos,
         })
     }
 
@@ -56,20 +57,11 @@ export default class Palette extends Component {
 
     render() {
         const {error, photos, loading} = this.state;
-
-        if (error) {
-            return <ErrorMessage/>;
-        }
-
-        if (loading) {
-            return <Spinner/>;
-        }
-
         const items = this.renderItems(photos);
 
         return(
             <div className='palette'>
-                {items}
+                {error ? <ErrorMessage /> : loading ? <Spinner/> : items}
             </div>
 
         )

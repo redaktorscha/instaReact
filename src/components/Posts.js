@@ -25,7 +25,7 @@ export default class Posts extends Component {
             posts, //===posts: posts,
             error: false,
         });
-        console.log(this.state.posts);
+        //console.log(this.state.posts);
     }
 
 //if not
@@ -65,16 +65,16 @@ export default class Posts extends Component {
     render() {
         const { error, posts } = this.state;
 
-        if (error) {
-            return <ErrorMessage />
+        // if (error) {
+        //     return <ErrorMessage />
            
-        }
+        // }
 
         const items = this.renderItems(posts);
 
         return (
             <div className='left'>
-                {items}
+                {error ? <ErrorMessage /> : items}
             </div>
         )
     }

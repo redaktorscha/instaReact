@@ -44,8 +44,7 @@ export default class Users extends Component {
     }
 
     renderUsers(dataArr) {
-        return dataArr.map(elem => {
-            const { nick, alt, pic, id } = elem;
+        return dataArr.map(({ nick, alt, pic, id }) => {
             return (
                 <User
                 key={id}
@@ -63,10 +62,10 @@ export default class Users extends Component {
 
         const userInfos = this.renderUsers(users);
 
-        if (error) {
-            return <ErrorMessage />
+        // if (error) {
+        //     return <ErrorMessage />
            
-        }
+        // }
         return (
            <div className='users__block'>
                 <Link to='/profile/'>
@@ -75,7 +74,7 @@ export default class Users extends Component {
                         alt='Ginny'
                         name='Ginny Weasley'/>
                 </Link>
-               {userInfos}
+               {error ? <ErrorMessage /> : userInfos}
            </div>
         )
     }
