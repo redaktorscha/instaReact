@@ -15,9 +15,12 @@ body {
 }
 
 header {
+    z-index: 9999999;
     height: 90px;
     background: #FFFFFF;
     box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0px;
 }
 
 .logo {
@@ -77,6 +80,7 @@ header {
 }
 
 .post {
+    position: relative;
     margin-bottom: 70px;
     width: 650px;
     min-height: 560px;
@@ -101,6 +105,26 @@ header {
     padding: 10px 20px;
     font-weight: 500;
     font-size: 18px;
+}
+
+.post__like-empty {    
+    background-position: -25px -161px;           
+}
+
+.post__like {
+    position: absolute;
+    display: block;
+    bottom: 1em;
+    right: 1em;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    background-image: url('./insta-sprite.png');
+    background-size: 270px 235px; 
+}
+
+.post__like-liked {
+    background-position: 0 -161px;
 }
 
 .post__descr {
@@ -154,7 +178,7 @@ header {
 .users__block {
     margin-top: 20px;
     padding: 20px;
-    max-width: 265px;
+    max-width: 300px;
     min-height: 260px;
     background: #FFFFFF;
     border: 1px solid rgba(0, 0, 0, 0.1);

@@ -10,6 +10,7 @@ export default class Posts extends Component {
     state = {
         posts: [],
         error: false,
+        liked: false,
     }
 
     //receive data from server and update posts array
@@ -36,6 +37,14 @@ export default class Posts extends Component {
         console.log(err);
     }
 
+    handleLike = (event) => {
+        this.setState({
+            liked: !this.state.liked,
+            chosenSpan: event.target.id,
+        });
+        //console.log(event.target.id);
+    }
+
     componentDidMount() {
         this.updatePosts();
     }
@@ -56,6 +65,9 @@ export default class Posts extends Component {
                     <img src={src} alt={alt}></img>
                     <div className='post__name'>{name}</div>
                     <div className='post__descr'>{descr}</div>
+                    <span id={id}
+                    className={this.state.liked  && this.state.chosenSpan === id ? 'post__like post__like-liked' : 'post__like post__like-empty'}
+                    onClick={this.handleLike}></span>
                 </div>
             );
         });
@@ -64,11 +76,6 @@ export default class Posts extends Component {
 
     render() {
         const { error, posts } = this.state;
-
-        // if (error) {
-        //     return <ErrorMessage />
-           
-        // }
 
         const items = this.renderItems(posts);
 

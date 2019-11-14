@@ -16,6 +16,9 @@ export default class Users extends Component {
         this.state = {
             users: [],
             error: false,
+            currentUser: {
+                picked: false,
+            },
         }    
     }
     componentDidMount() {
@@ -35,12 +38,49 @@ export default class Users extends Component {
             console.log(err);
     }
 
-    onUsersLoaded = (users) => {
+//userinfos for render
+    onUsersLoaded = (users) => {       
+        
+        const usersSpliced = this.setCurrentUser(users);
+        
         this.setState({
             error: false,
-            users: users,
+            users: usersSpliced,
         });
-        console.log(this.state.users)
+        console.log(this.state.users);
+    }
+
+    //get random index
+    getRandomUser = (usersArr) => {        
+        const randInt = arr => Math.floor(Math.random() * arr.length);
+        return randInt(usersArr);    
+    }
+
+    //setting new current user
+    setCurrentUser = (usersArr) => {
+        // if (this.state.currentUser.picked) {
+        //     usersArr.concat(deleted);
+        // }
+        //const index = this.state.currentUser.idCU || this.getRandomUser(usersArr);
+        const index = this.getRandomUser(usersArr);
+
+        //const currentUser = this.state.currentUser.idCU ? this.state.currentUser : usersArr[index]; 
+        const currentUser = usersArr[index];
+
+        const { nick, alt, pic, id } = currentUser;
+        const deleted = usersArr.splice(index, 1);
+
+        this.setState({
+            currentUser: {
+                nameCU: nick,
+                altCU: alt,
+                srcCU: pic,
+                idCU: id,
+                deleted,
+                picked: true, 
+            }       
+        }); 
+        return usersArr;
     }
 
     renderUsers(dataArr) {
@@ -58,7 +98,9 @@ export default class Users extends Component {
     }
     
     render() {
-        const { error, users } = this.state;
+        const { error, users, currentUser } = this.state;
+  
+        const {nameCU, altCU, srcCU} = currentUser;
 
         const userInfos = this.renderUsers(users);
 
@@ -70,9 +112,9 @@ export default class Users extends Component {
            <div className='users__block'>
                 <Link to='/profile/'>
                     <User
-                        src='https://upload.wikimedia.org/wikipedia/en/thumb/e/e7/Ginny_Weasley_poster.jpg/220px-Ginny_Weasley_poster.jpg'
-                        alt='Ginny'
-                        name='Ginny Weasley'/>
+                        src={srcCU}
+                        alt={altCU}
+                        name={nameCU}/>
                 </Link>
                {error ? <ErrorMessage /> : userInfos}
            </div>
